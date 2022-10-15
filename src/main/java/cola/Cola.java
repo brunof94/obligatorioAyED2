@@ -4,7 +4,7 @@ public class Cola<T> {
    private NodoCola<T> inicio;
    private NodoCola<T> fin;
    private int largo;
-
+    // COMENTARIO BOLUDO
 
     public Cola() {
 
