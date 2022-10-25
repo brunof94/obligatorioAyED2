@@ -18,7 +18,41 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno explorarCentroUrbano(boolean[] correctas, int[] puntajes, int minimo) {
-        return Retorno.noImplementada();
+        boolean minimoOk = minimo > 0;
+        if(correctas == null || puntajes == null){
+            return Retorno.error1("Los datos no son validos");
+        }
+        if(correctas.length < 3 || puntajes.length < 3){
+            return Retorno.error2("Los arreglos tienen que contener mas de 3 elementos");
+        }
+        if(correctas.length != puntajes.length){
+            return Retorno.error3("Los lenght de los arreglos son diferentes");
+        }
+        if(minimo <= 0){
+            return Retorno.error4("El minimo debe ser mayor a 0");
+        }
+        int puntaje = 0;
+        int consecutivas = 0;
+        for(int i = 0; i < correctas.length; i++){
+            if(correctas[i]){
+                puntaje += puntajes[i];
+                consecutivas++;
+                if(consecutivas == 3){
+                    puntaje += 3;
+                }else if(consecutivas == 4){
+                    puntaje += 5;
+                }else if(consecutivas >4){
+                    puntaje += 8;
+                }
+            }else{
+                consecutivas = 0;
+            }
+        }
+
+        if(puntaje >= minimo){
+            return Retorno.ok(puntaje, "pasa");
+        }
+        return Retorno.ok(puntaje, "no pasa");
     }
 
     @Override
