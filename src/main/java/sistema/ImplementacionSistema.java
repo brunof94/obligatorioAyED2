@@ -8,9 +8,12 @@ import interfaz.TipoJugador;
 
 public class ImplementacionSistema implements Sistema {
 
+    private int maxCentros;
     @Override
     public Retorno inicializarSistema(int maxCentros) {
-        return Retorno.noImplementada();
+        if(maxCentros < 5 ) return Retorno.error1("El sistema no puede tener menos de 5 centros");
+        this.maxCentros = maxCentros;
+        return Retorno.ok();
     }
 
     @Override
