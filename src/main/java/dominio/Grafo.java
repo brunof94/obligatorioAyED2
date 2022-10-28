@@ -66,10 +66,10 @@ public class Grafo {
         matAdy[posDestino][posOrigen] = camino;
     }
     //existeCentro(origen) && existeCentro(destino)
-    public boolean existeCamino(CentroUrbano origen, CentroUrbano destino){
+    public Camino buscarCamino(CentroUrbano origen, CentroUrbano destino){
         int posDestino = obtenerPos(destino);
         int posOrigen = obtenerPos(origen);
-        return matAdy[posDestino][posOrigen] != null;
+        return matAdy[posDestino][posOrigen];
     }
     //existeCentro(origen) && existeCentro(destino) && !existeCamino
     public void borrarCamino(CentroUrbano origen, CentroUrbano destino){

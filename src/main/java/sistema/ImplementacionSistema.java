@@ -106,7 +106,7 @@ public class ImplementacionSistema implements Sistema {
         if(centroOrigen == null) return Retorno.error3("No existe centro de origen");
         CentroUrbano centroDestino = grafo.buscarCentro(codigoCentroDestino);
         if(centroDestino == null) return Retorno.error4("No existe centro de destino");
-        if(grafo.existeCamino(centroOrigen, centroDestino)) return Retorno.error5("Ya existe ese camino");
+        if(grafo.buscarCamino(centroOrigen, centroDestino) != null) return Retorno.error5("Ya existe ese camino");
         Camino camino = new Camino(centroOrigen,centroDestino,costo,tiempo,kilometros,estadoDelCamino);
         grafo.agregarCamino(centroOrigen,centroDestino,camino);
         return Retorno.ok("ok");
@@ -114,7 +114,16 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno actualizarCamino(String codigoCentroOrigen, String codigoCentroDestino, double costo, double tiempo, double kilometros, EstadoCamino estadoDelCamino) {
-        return Retorno.noImplementada();
+        if(costo <= 0 || tiempo <= 0 || kilometros <=0) return Retorno.error1("Los parametros double deben ser positivos");
+        if(codigoCentroOrigen == null || codigoCentroDestino == null || estadoDelCamino == null || codigoCentroDestino.equals("") || codigoCentroOrigen.equals("")) return Retorno.error2("Los string no pueden ser null o vacio");
+        CentroUrbano centroOrigen = grafo.buscarCentro(codigoCentroOrigen);
+        if(centroOrigen == null) return Retorno.error3("No existe centro de origen");
+        CentroUrbano centroDestino = grafo.buscarCentro(codigoCentroDestino);
+        if(centroDestino == null) return Retorno.error4("No existe centro de destino");
+        if(grafo.buscarCamino(centroOrigen, centroDestino) == null) return Retorno.error5("No existe ese camino");
+        Camino camino = new Camino(centroOrigen,centroDestino,costo,tiempo,kilometros,estadoDelCamino);
+        grafo.agregarCamino(centroOrigen,centroDestino,camino);
+        return Retorno.ok("ok");
     }
 
     @Override
