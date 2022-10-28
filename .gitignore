@@ -1,5 +1,6 @@
 # ide created folder
 /.idea
+\.idea
 
 # Compiled class file
 *.class

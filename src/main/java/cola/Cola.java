@@ -1,8 +1,8 @@
 package cola;
 
 public class Cola<T> {
-   private NodoCola<T> inicio;
-   private NodoCola<T> fin;
+   private NodoGenerico<T> inicio;
+   private NodoGenerico<T> fin;
    private int largo;
     public Cola() {
 
@@ -15,10 +15,10 @@ public class Cola<T> {
 
     public void encolar(T dato) {
         if(this.inicio==null){
-            inicio = new NodoCola<T>(dato);
+            inicio = new NodoGenerico<T>(dato);
             fin = inicio;
         }else{
-            fin.setSig(new NodoCola<T>(dato));
+            fin.setSig(new NodoGenerico<T>(dato));
             fin = fin.getSig();
         }
     }

@@ -1,15 +1,15 @@
 package cola;
 
-public class NodoCola<T> {
+public class NodoGenerico<T> {
     private T dato;
 
-    private NodoCola<T> sig;
+    private NodoGenerico<T> sig;
 
-    public NodoCola(T dato, NodoCola<T> sig) {
+    public NodoGenerico(T dato, NodoGenerico<T> sig) {
         this.dato = dato;
         this.sig = sig;
     }
-    public NodoCola(T dato) {
+    public NodoGenerico(T dato) {
         this.dato = dato;
     }
 
@@ -21,11 +21,11 @@ public class NodoCola<T> {
         this.dato = dato;
     }
 
-    public NodoCola<T> getSig() {
+    public NodoGenerico<T> getSig() {
         return sig;
     }
 
-    public void setSig(NodoCola<T> sig) {
+    public void setSig(NodoGenerico<T> sig) {
         this.sig = sig;
     }
 }
