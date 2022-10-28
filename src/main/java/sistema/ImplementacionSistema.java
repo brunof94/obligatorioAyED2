@@ -1,5 +1,8 @@
 package sistema;
 
+import dominio.Camino;
+import dominio.CentroUrbano;
+import dominio.Grafo;
 import interfaz.Consulta;
 import interfaz.EstadoCamino;
 import interfaz.Retorno;
@@ -8,11 +11,11 @@ import interfaz.TipoJugador;
 
 public class ImplementacionSistema implements Sistema {
 
-    private int maxCentros;
+    private Grafo grafo;
     @Override
     public Retorno inicializarSistema(int maxCentros) {
-        if(maxCentros < 5 ) return Retorno.error1("El sistema no puede tener menos de 5 centros");
-        this.maxCentros = maxCentros;
+        if(maxCentros <= 5 ) return Retorno.error1("El sistema no puede tener menos de 5 centros");
+        this.grafo = new Grafo(maxCentros);
         return Retorno.ok();
     }
 
@@ -92,7 +95,16 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno registrarCamino(String codigoCentroOrigen, String codigoCentroDestino, double costo, double tiempo, double kilometros, EstadoCamino estadoDelCamino) {
-        return Retorno.noImplementada();
+        if(costo <= 0 || tiempo <= 0 || kilometros <=0) return Retorno.error1("Los parametros double deben ser positivos");
+        if(codigoCentroOrigen == null || codigoCentroDestino == null || estadoDelCamino == null || codigoCentroDestino.equals("") || codigoCentroOrigen.equals("")) return Retorno.error2("Los string no pueden ser null o vacio");
+        CentroUrbano centroOrigen = grafo.buscarCentro(codigoCentroOrigen);
+        if(centroOrigen == null) return Retorno.error3("No existe centro de origen");
+        CentroUrbano centroDestino = grafo.buscarCentro(codigoCentroDestino);
+        if(centroDestino == null) return Retorno.error4("No existe centro de destino");
+        if(grafo.existeCamino(centroOrigen, centroDestino)) return Retorno.error5("Ya existe ese camino");
+        Camino camino = new Camino(centroOrigen,centroDestino,costo,tiempo,kilometros,estadoDelCamino);
+        grafo.agregarCamino(centroOrigen,centroDestino,camino);
+        return Retorno.ok("ok");
     }
 
     @Override
