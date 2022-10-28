@@ -90,7 +90,12 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno registrarCentroUrbano(String codigo, String nombre) {
-        return Retorno.noImplementada();
+        if(grafo.esLleno()) return Retorno.error1("Se llego al maximo de centros urbanos permitidos");
+        if(codigo == null || nombre == null || codigo.equals("") || nombre.equals("")) return Retorno.error2("Algun dato esta vacio");
+        if(grafo.buscarCentro(codigo) != null) return Retorno.error3("Ya existe un centro urbano con ese codigo");
+        CentroUrbano centro = new CentroUrbano(codigo,nombre);
+        grafo.agregarCentro(centro);
+        return Retorno.ok();
     }
 
     @Override

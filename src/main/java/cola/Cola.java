@@ -13,7 +13,7 @@ public class Cola<T> {
     }
 
 
-    public void Encolar(T dato) {
+    public void encolar(T dato) {
         if(this.inicio==null){
             inicio = new NodoCola<T>(dato);
             fin = inicio;
