@@ -27,14 +27,14 @@ public class NodoABB {
     }
 
 
-    public NodoABB(Jugador unDato) {
-        this.jugador = unDato;
+    public NodoABB(Jugador jugador) {
+        this.jugador = jugador;
         this.izq = null;
         this.der = null;
     }
 
-    public NodoABB(Jugador unDato, NodoABB izq, NodoABB der) {
-        this.jugador = unDato;
+    public NodoABB(Jugador jugador, NodoABB izq, NodoABB der) {
+        this.jugador = jugador;
         this.izq = izq;
         this.der = der;
     }

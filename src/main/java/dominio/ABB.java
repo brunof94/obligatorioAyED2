@@ -8,46 +8,31 @@ public class ABB {
         this.raiz = null;
     }
 
-    // Pos: Inserta el dato pasado como parametro en el arbol manteniendolo ordenado.
-    public void insertar(Jugador dato) {
+    public void insertar(Jugador jugador) {
         if (this.raiz == null) {
-            this.raiz = new NodoABB(dato);
+            this.raiz = new NodoABB(jugador);
         } else {
-            insertarRec(this.raiz, dato);
+            insertarRec(this.raiz, jugador);
         }
     }
 
-    private void insertarRec(NodoABB nodo, Jugador dato) {
+    private void insertarRec(NodoABB nodo, Jugador jugador) {
         //Falta crear la comparacion
         int resultadoComparar = 1; //Resultado de la comparacion con compareto
         if (resultadoComparar > 0) {
             if (nodo.getIzq() == null) {
-                nodo.setIzq(new NodoABB(dato));
+                nodo.setIzq(new NodoABB(jugador));
             } else {
-                insertarRec(nodo.getIzq(), dato);
+                insertarRec(nodo.getIzq(), jugador);
             }
         } else if (resultadoComparar < 0) {
             if (nodo.getDer() == null) {
-                nodo.setDer(new NodoABB(dato));
+                nodo.setDer(new NodoABB(jugador));
             } else {
-                insertarRec(nodo.getDer(), dato);
+                insertarRec(nodo.getDer(), jugador);
             }
         }
     }
-
-    /**
-     * Ejercicio 5 - Parte B
-     *
-     * @return Retorna true sii el dato pasado como parámetro pertenece al ABB.
-     */
-    public boolean pertenece(int dato) {
-        return pertenece(dato, raiz);
-    }
-
-    private boolean pertenece(int dato, NodoABB nodo) {
-        return false;
-    }
-
     public void listarAscendente() {
         System.out.println(listarAscendente(raiz));
     }
@@ -56,28 +41,11 @@ public class ABB {
         return "";
     }
 
-    /**
-     * Ejercicio 5 - Parte D
-     * Lista en pantalla los elementos del ABB ordenados de mayor a menor.
-     */
     public void listarDescendente() {
         System.out.println(listarDescendente(raiz));
     }
-
     private String listarDescendente(NodoABB nodo) {
         return "";
-    }
-
-    public int borrarMinimo() {
-        return 0;
-    }
-
-    public int elementosMayoresA(int k) {
-        return 0;
-    }
-
-    public int cantidadDeElementosEnRango(int desde, int hasta) {
-        return 0;
     }
 
 
