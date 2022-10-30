@@ -10,10 +10,12 @@ import interfaz.TipoJugador;
 public class ImplementacionSistema implements Sistema {
 
     private Grafo grafo;
+    private ABB jugadores;
     @Override
     public Retorno inicializarSistema(int maxCentros) {
         if(maxCentros <= 5 ) return Retorno.error1("El sistema no puede tener menos de 5 centros");
         this.grafo = new Grafo(maxCentros);
+        this.jugadores = new ABB();
         return Retorno.ok();
     }
 
@@ -60,8 +62,9 @@ public class ImplementacionSistema implements Sistema {
     public Retorno registrarJugador(String ci, String nombre,int edad, String escuela, TipoJugador tipo) {
         if(ci == null || nombre == null || escuela == null || ci == "" || nombre == "" || escuela == "" || tipo == null || edad < 1) return Retorno.error1("Alguno de los campos esta vacio");
         if(!Jugador.validarCedula(ci)) return Retorno.error2("El formato de la cedula es invalido");
-        if(ABB.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
-        ABB.registrarJugador(ci, nombre, edad, escuela, tipo);
+        if(jugadores.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
+        Jugador j = new Jugador(ci, nombre, edad, escuela, tipo);
+        jugadores.insertar(j);
         return Retorno.ok();
     }
 
@@ -77,12 +80,13 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno listarJugadoresPorCedulaAscendente() {
-        return Retorno.noImplementada();
+
+        return Retorno.ok(jugadores.listarJugadoresAscendente());
     }
 
     @Override
     public Retorno listarJugadoresPorCedulaDescendente() {
-        return Retorno.noImplementada();
+        return Retorno.ok(jugadores.listarJugadoresDescendente());
     }
 
     @Override

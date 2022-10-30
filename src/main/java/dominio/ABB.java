@@ -1,5 +1,7 @@
 package dominio;
 
+import cola.NodoGenerico;
+import dominio.Lista.ListaSimpleEncadenada;
 import interfaz.TipoJugador;
 
 public class ABB {
@@ -14,7 +16,7 @@ public class ABB {
         return null;
     }
 
-    public static void registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
+    public void registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
     }
 
     public void insertar(Jugador jugador) {
@@ -42,20 +44,52 @@ public class ABB {
             }
         }
     }
-    public void listarAscendente() {
-        System.out.println(listarAscendente(raiz));
+    private ListaSimpleEncadenada listaAscJugadores() {
+        ListaSimpleEncadenada lista = new ListaSimpleEncadenada();
+        listaAscJugadores(raiz,lista);
+        return lista;
     }
 
-    private String listarAscendente(NodoABB nodo) {
-        return "";
+    private void listaAscJugadores(NodoABB nodo, ListaSimpleEncadenada lista) {
+        if(nodo !=null){
+            listaAscJugadores(nodo.getIzq(),lista);
+            lista.agregarAlPrincipio(nodo.getJugador());
+            listaAscJugadores(nodo.getDer(),lista);
+        }
+
+    }
+    public String listarJugadoresAscendente(){
+        String str= "";
+        ListaSimpleEncadenada lista = listaAscJugadores();
+        NodoGenerico aux = lista.getPrimero();
+        while (aux != null) {
+            str+= aux.getDato().toString();
+            aux = aux.getSig();
+        }
+        return str;
+    }
+    public String listarJugadoresDescendente(){
+        String str= "";
+        ListaSimpleEncadenada lista = listaAscJugadores();
+        NodoGenerico aux = lista.getPrimero();
+        while (aux != null) {
+            str+= aux.getDato().toString();
+            aux = aux.getSig();
+        }
+        return str;
     }
 
-    public void listarDescendente() {
-        System.out.println(listarDescendente(raiz));
+    public ListaSimpleEncadenada listarDescendente() {
+        ListaSimpleEncadenada lista = new ListaSimpleEncadenada();
+        listaAscJugadores(raiz,lista);
+        return lista;
     }
-    private String listarDescendente(NodoABB nodo) {
-        return "";
+    private void listarDescendente(NodoABB nodo, ListaSimpleEncadenada lista) {
+        if(nodo !=null){
+            listaAscJugadores(nodo.getIzq(),lista);
+            lista.agregarAlPrincipio(nodo.getJugador());
+            listaAscJugadores(nodo.getDer(),lista);
+        }
     }
-
-
+    
 }

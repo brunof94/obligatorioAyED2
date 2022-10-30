@@ -63,5 +63,12 @@ public class Jugador {
         return Integer.parseInt(retornoString);
     }
 
-
+    @Override
+    public String toString() {
+        return   cedula +
+                ";" + nombre +
+                ";" + edad +
+                ";" + escuela +
+                ";" + tipoJugador.getValor() + "|";
+    }
 }

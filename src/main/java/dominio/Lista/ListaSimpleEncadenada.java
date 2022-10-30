@@ -45,6 +45,9 @@ public class ListaSimpleEncadenada<T> {
         return devuelve;
     }
 
+    public NodoGenerico<T> getPrimero() {
+        return primero;
+    }
 
     public int getLargo() {
         return this.cantNodos;
