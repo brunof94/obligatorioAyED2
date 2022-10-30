@@ -1,11 +1,20 @@
 package dominio;
 
+import interfaz.TipoJugador;
+
 public class ABB {
 
     private NodoABB raiz;
 
     public ABB() {
         this.raiz = null;
+    }
+
+    public static Jugador buscarJugadorCedula(String ci) {
+        return null;
+    }
+
+    public static void registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
     }
 
     public void insertar(Jugador jugador) {

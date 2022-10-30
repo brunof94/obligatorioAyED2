@@ -1,8 +1,6 @@
 package sistema;
 
-import dominio.Camino;
-import dominio.CentroUrbano;
-import dominio.Grafo;
+import dominio.*;
 import interfaz.Consulta;
 import interfaz.EstadoCamino;
 import interfaz.Retorno;
@@ -60,7 +58,11 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno registrarJugador(String ci, String nombre,int edad, String escuela, TipoJugador tipo) {
-        return Retorno.noImplementada();
+        if(ci == null || nombre == null || escuela == null || ci == "" || nombre == "" || escuela == "" || tipo == null || edad < 1) return Retorno.error1("Alguno de los campos esta vacio");
+        if(!Jugador.validarCedula(ci)) return Retorno.error2("El formato de la cedula es invalido");
+        if(ABB.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
+        ABB.registrarJugador(ci, nombre, edad, escuela, tipo);
+        return Retorno.ok();
     }
 
     @Override
