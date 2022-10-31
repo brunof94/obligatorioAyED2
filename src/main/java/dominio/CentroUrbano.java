@@ -17,7 +17,8 @@ public class CentroUrbano {
         return nombre;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return codigo + ";" + nombre + "|";
+    }
 }

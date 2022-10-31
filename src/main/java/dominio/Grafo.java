@@ -2,6 +2,8 @@ package dominio;
 
 import cola.Cola;
 
+import java.util.Arrays;
+
 public class Grafo {
     private int tope;
     private int cantidad;
@@ -63,19 +65,19 @@ public class Grafo {
     public void agregarCamino(CentroUrbano origen, CentroUrbano destino, Camino camino){
         int posDestino = obtenerPos(destino);
         int posOrigen = obtenerPos(origen);
-        matAdy[posDestino][posOrigen] = camino;
+        matAdy[posOrigen][posDestino] = camino;
     }
     //existeCentro(origen) && existeCentro(destino)
     public Camino buscarCamino(CentroUrbano origen, CentroUrbano destino){
         int posDestino = obtenerPos(destino);
         int posOrigen = obtenerPos(origen);
-        return matAdy[posDestino][posOrigen];
+        return matAdy[posOrigen][posDestino];
     }
     //existeCentro(origen) && existeCentro(destino) && !existeCamino
     public void borrarCamino(CentroUrbano origen, CentroUrbano destino){
         int posDestino = obtenerPos(destino);
         int posOrigen = obtenerPos(origen);
-        matAdy[posDestino][posOrigen] = null;
+        matAdy[posOrigen][posDestino] = null;
     }
     public void borrarCentro(CentroUrbano cu) {
         int pos = obtenerPos(cu);
@@ -95,22 +97,30 @@ public class Grafo {
     private void dfsRec(int pos, boolean[] visitados){
         //FALTA IMPLEMETNAR
     }
-    public void bfs(CentroUrbano cu){
+    public String bfs(CentroUrbano cu, int saltos){
+        int cantidadDeSaltos = 0;
+        int centrosAProcesar= 1;
+        String str ="";
         int inicio = obtenerPos(cu);
         boolean[] visitados = new boolean[this.tope];
         Cola<Integer> cola = new Cola<>();
         cola.encolar(inicio);
         visitados[inicio]=true;
-        while(!cola.esVacia()){
+        while(!cola.esVacia() && cantidadDeSaltos<=saltos && centrosAProcesar>0){
             int pos = cola.desencolar();
-            System.out.println(centros[pos]);
+            str += centros[pos].toString();
+            centrosAProcesar--;
             for (int i = 0; i < this.tope; i++) {
                 if(this.matAdy[pos][i]!= null && !visitados[i]){
                     cola.encolar(i);
                     visitados[i] = true;
+                    centrosAProcesar++;
                 }
             }
+
+            cantidadDeSaltos++;
         }
+        return str;
     }
 
     public double dijkstra(CentroUrbano origen, CentroUrbano destino){

@@ -152,7 +152,7 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno listadoCentrosCantDeSaltos(String codigoCentroOrigen, int cantidad) {
-        return Retorno.noImplementada();
+        return Retorno.ok(grafo.bfs(grafo.buscarCentro(codigoCentroOrigen),cantidad));
     }
 
     @Override
