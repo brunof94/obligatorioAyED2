@@ -21,6 +21,7 @@ public class Cola<T> {
             fin.setSig(new NodoGenerico<T>(dato));
             fin = fin.getSig();
         }
+        this.largo++;
     }
 
 
