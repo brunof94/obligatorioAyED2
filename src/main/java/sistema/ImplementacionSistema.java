@@ -15,16 +15,13 @@ public class ImplementacionSistema implements Sistema {
 
     private Grafo grafo;
     private ABB jugadores;
-    private ListaSimpleEncadenada[] tipoDeJugadores;
+    private TipoDeJugadores tipoDeJugadores;
     @Override
     public Retorno inicializarSistema(int maxCentros) {
         if(maxCentros <= 5 ) return Retorno.error1("El sistema no puede tener menos de 5 centros");
         this.grafo = new Grafo(maxCentros);
         this.jugadores = new ABB();
-        tipoDeJugadores = new ListaSimpleEncadenada[4];
-        for (int i = 0; i < 4; i++) {
-            tipoDeJugadores[i] = new ListaSimpleEncadenada();
-        }
+        this.tipoDeJugadores = new TipoDeJugadores();
         return Retorno.ok();
     }
 
@@ -74,8 +71,8 @@ public class ImplementacionSistema implements Sistema {
         if(jugadores.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
         Jugador j = new Jugador(ci, nombre, edad, escuela, tipo);
         if(jugadores.insertar(j)){
-            TipoJugador tipoJugador = j.getTipoJugador();
-            tipoDeJugadores[tipoJugador.getIndice()].agregarAlPrincipio(j);
+            int indice = j.getTipoJugador().getIndice();
+            tipoDeJugadores.agregar(indice,j);
             return Retorno.ok();
         }
         return Retorno.error3("Ya existe ese jugador");
@@ -108,18 +105,8 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno listarJugadoresPorTipo(TipoJugador unTipo) {
         if(unTipo == null)return Retorno.error1("Tipo de jugador null");
-        String str= "";
-        ListaSimpleEncadenada lista = tipoDeJugadores[unTipo.getIndice()];
-        NodoGenerico aux = lista.getPrimero();
-        if(aux != null){
-            str+= aux.getDato().toString();
-            aux = aux.getSig();
-        }
-        while (aux != null) {
-            str+= "|" + aux.getDato().toString();
-            aux = aux.getSig();
-        }
-        return Retorno.ok(str);
+        int indice = unTipo.getIndice();
+        return Retorno.ok(tipoDeJugadores.listaDeJugadoresPorTipo(indice));
     }
 
     @Override
