@@ -12,8 +12,25 @@ public class ABB {
         this.raiz = null;
     }
 
-    public static Jugador buscarJugadorCedula(String ci) {
-        return null;
+    public Jugador buscarJugadorCedula(String ci) {
+        if(raiz == null) return null;
+        if(raiz.getJugador().getCedula().equals(ci)){
+            return raiz.getJugador();
+        }
+        return buscarJugadorCedula(ci, raiz, 1);
+    }
+
+    private Jugador buscarJugadorCedula(String ci, NodoABB nodo, int i) {
+        if(nodo == null) return null;
+        Jugador j = new Jugador(ci,null,0,null,null);
+        if(nodo.getJugador().compareTo(j) == 0){
+            nodo.getJugador();
+            return nodo.getJugador();
+        }
+        if(nodo.getJugador().compareTo(j) > 0){
+            return buscarJugadorCedula(ci,nodo.getDer(),i++);
+        }
+        return buscarJugadorCedula(ci,nodo.getIzq(),i++);
     }
 
     public void registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
