@@ -1,6 +1,7 @@
 package dominio;
 
 import cola.Cola;
+import interfaz.EstadoCamino;
 
 import java.util.Arrays;
 
@@ -129,8 +130,15 @@ public class Grafo {
         return abbAux;
     }
 
+    public retornoDijktra dijktraPorKilometro(CentroUrbano origen, CentroUrbano destino){
+        return dijkstra(origen, destino, "Kilometro");
+    }
 
-    public double dijkstra(CentroUrbano origen, CentroUrbano destino){
+    public retornoDijktra dijktraPorCostos(CentroUrbano origen, CentroUrbano destino){
+        return dijkstra(origen, destino, "Costo");
+    }
+
+    private retornoDijktra dijkstra(CentroUrbano origen, CentroUrbano destino, String condicion){
         int posDestino = obtenerPos(destino);
         int posOrigen = obtenerPos(origen);
         boolean[] visitados = new boolean[this.tope];
@@ -146,8 +154,19 @@ public class Grafo {
             if(pos != -1){
                 visitados[pos]=true;
                 for (int j = 0; j < this.tope; j++) {
-                    if(matAdy[pos][j]!=null &&!visitados[j]){
-                        double distanciaNueva = costos[pos] + matAdy[pos][j].getCosto();
+                    Camino camino = matAdy[pos][j];
+                    if(camino !=null && !visitados[j] && camino.getEstado() != EstadoCamino.MALO){
+                        double distanciaNueva;
+                        switch(condicion){
+                            case "Kilometro":
+                                distanciaNueva = costos[pos] + matAdy[pos][j].getKilometros();
+                                break;
+                            case "Costo":
+                                distanciaNueva = distanciaNueva = costos[pos] + matAdy[pos][j].getCosto();
+                                break;
+                            default:
+                                distanciaNueva = 0;
+                        }
                         if(distanciaNueva < costos[j]){
                             costos[j] = distanciaNueva;
                             anterior[j] = centros[pos];
@@ -157,7 +176,15 @@ public class Grafo {
                 }
             }
         }
-        return costos[posDestino];
+        CentroUrbano centroActual = destino;
+        String ret = "";
+        while(centroActual != null){
+            int posicionCentro = obtenerPos(centroActual);
+            ret = "|" + centroActual.toString() + ret;
+            centroActual = anterior[posicionCentro];
+        }
+
+        return new retornoDijktra((int)costos[posDestino], ret.substring(1));
     }
 
     private int obtenerSigNoVisitadoMenorDistancia(double[] costos, boolean[] visitados) {
@@ -172,3 +199,4 @@ public class Grafo {
         return posMin;
     }
 }
+

@@ -122,9 +122,6 @@ public class ABB {
 
     public  String consultaDeJugadores(Consulta consulta) {
         Consulta.NodoConsulta nc = consulta.getRaiz();
-        while(nc != null){
-
-        }
         return "";
     }
 }

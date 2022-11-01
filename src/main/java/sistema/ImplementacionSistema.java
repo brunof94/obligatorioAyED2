@@ -159,11 +159,27 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno viajeCostoMinimoKilometros(String codigoCentroOrigen, String codigoCentroDestino) {
-        return Retorno.noImplementada();
+        if(codigoCentroOrigen == null || codigoCentroDestino == null || codigoCentroDestino.equals("") || codigoCentroOrigen.equals("")) return Retorno.error1("Los centros no pueden ser vacios");
+        CentroUrbano centroOrigen = grafo.buscarCentro(codigoCentroOrigen);
+        if(centroOrigen == null) return Retorno.error3("No existe centro de origen");
+        CentroUrbano centroDestino = grafo.buscarCentro(codigoCentroDestino);
+        if(centroDestino == null) return Retorno.error4("No existe centro de destino");
+
+        retornoDijktra ret = grafo.dijktraPorKilometro(centroOrigen,centroDestino);
+        if(ret.getCosto() == Integer.MAX_VALUE) return Retorno.error2("No hay camino");
+        return Retorno.ok(ret.getCosto(), ret.getCamino());
     }
 
     @Override
     public Retorno viajeCostoMinimoMonedas(String codigoCentroOrigen, String codigoCentroDestino) {
-        return Retorno.noImplementada();
+        if(codigoCentroOrigen == null || codigoCentroDestino == null || codigoCentroDestino.equals("") || codigoCentroOrigen.equals("")) return Retorno.error1("Los centros no pueden ser vacios");
+        CentroUrbano centroOrigen = grafo.buscarCentro(codigoCentroOrigen);
+        if(centroOrigen == null) return Retorno.error3("No existe centro de origen");
+        CentroUrbano centroDestino = grafo.buscarCentro(codigoCentroDestino);
+        if(centroDestino == null) return Retorno.error4("No existe centro de destino");
+
+        retornoDijktra ret = grafo.dijktraPorCostos(centroOrigen,centroDestino);
+        if(ret.getCosto() == Integer.MAX_VALUE) return Retorno.error2("No hay camino");
+        return Retorno.ok(ret.getCosto(), ret.getCamino());
     }
 }
