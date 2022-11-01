@@ -74,7 +74,8 @@ public class ImplementacionSistema implements Sistema {
         if(jugadores.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
         Jugador j = new Jugador(ci, nombre, edad, escuela, tipo);
         if(jugadores.insertar(j)){
-            tipoDeJugadores[j.getTipoJugador().getIndice()].agregarAlPrincipio(j);
+            TipoJugador tipoJugador = j.getTipoJugador();
+            tipoDeJugadores[tipoJugador.getIndice()].agregarAlPrincipio(j);
             return Retorno.ok();
         }
         return Retorno.error3("Ya existe ese jugador");
@@ -107,8 +108,12 @@ public class ImplementacionSistema implements Sistema {
         String str= "";
         ListaSimpleEncadenada lista = tipoDeJugadores[unTipo.getIndice()];
         NodoGenerico aux = lista.getPrimero();
-        while (aux != null) {
+        if(aux != null){
             str+= aux.getDato().toString();
+            aux = aux.getSig();
+        }
+        while (aux != null) {
+            str+= "|" + aux.getDato().toString();
             aux = aux.getSig();
         }
         return Retorno.ok(str);

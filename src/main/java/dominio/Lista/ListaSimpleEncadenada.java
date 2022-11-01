@@ -21,7 +21,6 @@ public class ListaSimpleEncadenada<T> {
         this.cantNodos++;
     }
 
-
     public void agregarAlFinal(T elementoNuevo) {
         NodoGenerico nuevo = new NodoGenerico<T>(elementoNuevo);
         if (estaVacia()) {

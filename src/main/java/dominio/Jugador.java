@@ -69,7 +69,7 @@ public class Jugador implements Comparable<Jugador>{
                 ";" + nombre +
                 ";" + edad +
                 ";" + escuela +
-                ";" + tipoJugador.getValor() + "|";
+                ";" + tipoJugador.getValor();
     }
 
 

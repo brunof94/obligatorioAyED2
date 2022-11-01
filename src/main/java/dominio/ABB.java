@@ -36,17 +36,18 @@ public class ABB {
                 nodo.setIzq(new NodoABB(jugador));
                 return true;
             } else {
-                insertarRec(nodo.getIzq(), jugador);
+                return insertarRec(nodo.getIzq(), jugador);
             }
         } else if (resultadoComparar < 0) {
             if (nodo.getDer() == null) {
                 nodo.setDer(new NodoABB(jugador));
                 return true;
             } else {
-                insertarRec(nodo.getDer(), jugador);
+                return insertarRec(nodo.getDer(), jugador);
             }
+        }else {
+            return false;
         }
-        return false;
     }
     private ListaSimpleEncadenada listaAscJugadores() {
         ListaSimpleEncadenada lista = new ListaSimpleEncadenada();
