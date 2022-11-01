@@ -13,10 +13,6 @@ public class ABB {
     }
 
     public JugadorConNivel buscarJugadorCedula(String ci) {
-        if(raiz == null) return null;
-        if(raiz.getJugador().getCedula().equals(ci)){
-            return new JugadorConNivel(raiz.getJugador(), 0);
-        }
         return buscarJugadorCedula(ci, raiz, 0);
     }
 
@@ -24,12 +20,12 @@ public class ABB {
         if(nodo == null) return null;
         Jugador j = new Jugador(ci,"",0,"",TipoJugador.INICIAL);
         if(nodo.getJugador().compareTo(j) == 0){
-            return new JugadorConNivel(nodo.getJugador(), ++i);
+            return new JugadorConNivel(nodo.getJugador(), i);
         }
         if(nodo.getJugador().compareTo(j) < 0){
-            return buscarJugadorCedula(ci,nodo.getDer(),i++);
+            return buscarJugadorCedula(ci,nodo.getDer(),++i);
         }
-        return buscarJugadorCedula(ci,nodo.getIzq(),i++);
+        return buscarJugadorCedula(ci,nodo.getIzq(),++i);
     }
 
     public void registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
