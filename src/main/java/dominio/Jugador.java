@@ -5,7 +5,7 @@ import interfaz.TipoJugador;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Jugador {
+public class Jugador implements Comparable<Jugador>{
 
     private int cedulaInt;
     private String nombre;
@@ -70,5 +70,13 @@ public class Jugador {
                 ";" + edad +
                 ";" + escuela +
                 ";" + tipoJugador.getValor() + "|";
+    }
+
+
+    @Override
+    public int compareTo(Jugador j) {
+        if(this.cedulaInt == j.cedulaInt) return 0;
+        if(this.cedulaInt > j.cedulaInt) return 1;
+        return -1;
     }
 }

@@ -73,9 +73,11 @@ public class ImplementacionSistema implements Sistema {
         if(!Jugador.validarCedula(ci)) return Retorno.error2("El formato de la cedula es invalido");
         if(jugadores.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
         Jugador j = new Jugador(ci, nombre, edad, escuela, tipo);
-        jugadores.insertar(j);
-        tipoDeJugadores[j.getTipoJugador().getIndice()].agregarAlPrincipio(j);
-        return Retorno.ok();
+        if(jugadores.insertar(j)){
+            tipoDeJugadores[j.getTipoJugador().getIndice()].agregarAlPrincipio(j);
+            return Retorno.ok();
+        }
+        return Retorno.error3("Ya existe ese jugador");
     }
 
     @Override

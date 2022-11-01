@@ -19,30 +19,34 @@ public class ABB {
     public void registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
     }
 
-    public void insertar(Jugador jugador) {
+    public boolean insertar(Jugador jugador) {
         if (this.raiz == null) {
             this.raiz = new NodoABB(jugador);
+            return true;
         } else {
-            insertarRec(this.raiz, jugador);
+            return insertarRec(this.raiz, jugador);
         }
     }
 
-    private void insertarRec(NodoABB nodo, Jugador jugador) {
+    private boolean insertarRec(NodoABB nodo, Jugador jugador) {
         //Falta crear la comparacion
-        int resultadoComparar = 1; //Resultado de la comparacion con compareto
+        int resultadoComparar = jugador.compareTo(nodo.getJugador()); //Resultado de la comparacion con compareto
         if (resultadoComparar > 0) {
             if (nodo.getIzq() == null) {
                 nodo.setIzq(new NodoABB(jugador));
+                return true;
             } else {
                 insertarRec(nodo.getIzq(), jugador);
             }
         } else if (resultadoComparar < 0) {
             if (nodo.getDer() == null) {
                 nodo.setDer(new NodoABB(jugador));
+                return true;
             } else {
                 insertarRec(nodo.getDer(), jugador);
             }
         }
+        return false;
     }
     private ListaSimpleEncadenada listaAscJugadores() {
         ListaSimpleEncadenada lista = new ListaSimpleEncadenada();
