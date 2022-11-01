@@ -86,9 +86,9 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno buscarJugador(String ci) {
         if(!Jugador.validarCedula(ci)) return Retorno.error1("La cedula no tiene un formato valido");
-        Jugador j = jugadores.buscarJugadorCedula(ci);
+        JugadorConNivel j = jugadores.buscarJugadorCedula(ci);
         if(j == null) return Retorno.error2("Jugador no encontrado");
-        return Retorno.ok(0,j.toString());
+        return Retorno.ok(j.getElementosRecorridos(),j.getJugador().toString());
     }
 
     @Override

@@ -12,22 +12,21 @@ public class ABB {
         this.raiz = null;
     }
 
-    public Jugador buscarJugadorCedula(String ci) {
+    public JugadorConNivel buscarJugadorCedula(String ci) {
         if(raiz == null) return null;
         if(raiz.getJugador().getCedula().equals(ci)){
-            return raiz.getJugador();
+            return new JugadorConNivel(raiz.getJugador(), 0);
         }
-        return buscarJugadorCedula(ci, raiz, 1);
+        return buscarJugadorCedula(ci, raiz, 0);
     }
 
-    private Jugador buscarJugadorCedula(String ci, NodoABB nodo, int i) {
+    private JugadorConNivel buscarJugadorCedula(String ci, NodoABB nodo, int i) {
         if(nodo == null) return null;
-        Jugador j = new Jugador(ci,null,0,null,null);
+        Jugador j = new Jugador(ci,"",0,"",TipoJugador.INICIAL);
         if(nodo.getJugador().compareTo(j) == 0){
-            nodo.getJugador();
-            return nodo.getJugador();
+            return new JugadorConNivel(nodo.getJugador(), ++i);
         }
-        if(nodo.getJugador().compareTo(j) > 0){
+        if(nodo.getJugador().compareTo(j) < 0){
             return buscarJugadorCedula(ci,nodo.getDer(),i++);
         }
         return buscarJugadorCedula(ci,nodo.getIzq(),i++);
@@ -48,14 +47,14 @@ public class ABB {
     private boolean insertarRec(NodoABB nodo, Jugador jugador) {
         //Falta crear la comparacion
         int resultadoComparar = jugador.compareTo(nodo.getJugador()); //Resultado de la comparacion con compareto
-        if (resultadoComparar > 0) {
+        if (resultadoComparar < 0) {
             if (nodo.getIzq() == null) {
                 nodo.setIzq(new NodoABB(jugador));
                 return true;
             } else {
                 return insertarRec(nodo.getIzq(), jugador);
             }
-        } else if (resultadoComparar < 0) {
+        } else if (resultadoComparar > 0) {
             if (nodo.getDer() == null) {
                 nodo.setDer(new NodoABB(jugador));
                 return true;
@@ -89,7 +88,7 @@ public class ABB {
             aux = aux.getSig();
         }
         while (aux != null) {
-            str+= "|" + aux.getDato().toString();
+            str = aux.getDato().toString() +  "|" + str;
             aux = aux.getSig();
         }
         return str;
@@ -103,7 +102,7 @@ public class ABB {
             aux = aux.getSig();
         }
         while (aux != null) {
-            str = aux.getDato().toString() +  "|" + str;
+            str+= "|" + aux.getDato().toString();
             aux = aux.getSig();
         }
         return str;
