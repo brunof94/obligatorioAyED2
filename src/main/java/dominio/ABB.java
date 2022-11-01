@@ -2,6 +2,7 @@ package dominio;
 
 import cola.NodoGenerico;
 import dominio.Lista.ListaSimpleEncadenada;
+import interfaz.Consulta;
 import interfaz.TipoJugador;
 
 public class ABB {
@@ -11,6 +12,8 @@ public class ABB {
     public ABB() {
         this.raiz = null;
     }
+
+
 
     public JugadorConNivel buscarJugadorCedula(String ci) {
         return buscarJugadorCedula(ci, raiz, 0);
@@ -115,5 +118,13 @@ public class ABB {
             lista.agregarAlPrincipio(nodo.getJugador());
             listaAscJugadores(nodo.getDer(),lista);
         }
+    }
+
+    public  String consultaDeJugadores(Consulta consulta) {
+        Consulta.NodoConsulta nc = consulta.getRaiz();
+        while(nc != null){
+
+        }
+        return "";
     }
 }

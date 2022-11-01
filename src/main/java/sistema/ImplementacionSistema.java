@@ -80,7 +80,9 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno filtrarJugadores(Consulta consulta) {
-        return Retorno.noImplementada();
+        if(consulta == null) return Retorno.error1("La consulta no puede ser vacia");
+        String resultadoConsulta = jugadores.consultaDeJugadores(consulta);
+        return Retorno.ok(resultadoConsulta);
     }
 
     @Override
