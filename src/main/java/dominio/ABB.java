@@ -67,8 +67,12 @@ public class ABB {
         String str= "";
         ListaSimpleEncadenada lista = listaAscJugadores();
         NodoGenerico aux = lista.getPrimero();
+        if(aux != null){
+            str = aux.getDato().toString();
+            aux = aux.getSig();
+        }
         while (aux != null) {
-            str+= aux.getDato().toString();
+            str+= "|" + aux.getDato().toString();
             aux = aux.getSig();
         }
         return str;
@@ -77,8 +81,12 @@ public class ABB {
         String str= "";
         ListaSimpleEncadenada lista = listaAscJugadores();
         NodoGenerico aux = lista.getPrimero();
+        if(aux != null){
+            str = aux.getDato().toString();
+            aux = aux.getSig();
+        }
         while (aux != null) {
-            str+= aux.getDato().toString();
+            str = aux.getDato().toString() +  "|" + str;
             aux = aux.getSig();
         }
         return str;
