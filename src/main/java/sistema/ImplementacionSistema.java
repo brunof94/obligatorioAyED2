@@ -152,7 +152,7 @@ public class ImplementacionSistema implements Sistema {
         if(cantidad<0)return Retorno.error1("La cantidad debe ser mayor a 0");
         CentroUrbano centroOrigen = grafo.buscarCentro(codigoCentroOrigen);
         if(centroOrigen == null) return Retorno.error2("No existe centro de origen");
-        return Retorno.ok(grafo.bfs(grafo.buscarCentro(codigoCentroOrigen),cantidad));
+        return Retorno.ok(grafo.listadoDeCentrosPorSaltos(grafo.buscarCentro(codigoCentroOrigen),cantidad));
     }
 
     @Override

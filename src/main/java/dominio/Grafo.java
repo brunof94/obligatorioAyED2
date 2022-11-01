@@ -97,30 +97,36 @@ public class Grafo {
     private void dfsRec(int pos, boolean[] visitados){
         //FALTA IMPLEMETNAR
     }
-    public String bfs(CentroUrbano cu, int saltos){
-        int cantidadDeSaltos = 0;
-        int centrosAProcesar= 1;
-        String str ="";
+    public String listadoDeCentrosPorSaltos (CentroUrbano cu, int saltos){
+        ABBCentrosUrbanos abb = bfs(cu,saltos);
+        return abb.listarcentroUrbanoAscendente();
+    }
+    private ABBCentrosUrbanos bfs(CentroUrbano cu, int saltos){
+        ABBCentrosUrbanos abbAux = new ABBCentrosUrbanos();
+
+        int[] nroSalto = new int[tope];
         int inicio = obtenerPos(cu);
         boolean[] visitados = new boolean[this.tope];
+
         Cola<Integer> cola = new Cola<>();
         cola.encolar(inicio);
         visitados[inicio]=true;
-        while(!cola.esVacia() && cantidadDeSaltos<=saltos && centrosAProcesar>0){
+
+        while(!cola.esVacia()){
             int pos = cola.desencolar();
-            str += centros[pos].toString();
-            centrosAProcesar--;
+            if(nroSalto[pos] <= saltos){
+                abbAux.insertar(centros[pos]);
+            }
+
             for (int i = 0; i < this.tope; i++) {
                 if(this.matAdy[pos][i]!= null && !visitados[i]){
                     cola.encolar(i);
+                    nroSalto[i] = nroSalto[pos] + 1;
                     visitados[i] = true;
-                    centrosAProcesar++;
                 }
             }
-
-            cantidadDeSaltos++;
         }
-        return str;
+        return abbAux;
     }
 
 

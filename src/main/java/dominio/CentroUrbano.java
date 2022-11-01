@@ -19,7 +19,7 @@ public class CentroUrbano implements Comparable<CentroUrbano>{
 
     @Override
     public String toString() {
-        return codigo + ";" + nombre + "|";
+        return codigo + ";" + nombre;
     }
     @Override
     public int compareTo(CentroUrbano cu) {
