@@ -70,13 +70,40 @@ public class ABBJugadores {
         ListaSimple lista = listaAscJugadores();
         NodoGenerico aux = lista.getPrimero();
         while (aux != null) {
-            str = "|" + aux.getDato().toString() + str;
+            str = str + "|" + aux.getDato().toString();
             aux = aux.getSig();
         }
         if (!str.equals(""))
             return str.substring(1);
         return str;
 
+    }
+
+    public String listarJugadoresDescendente() {
+        String str = "";
+        ListaSimple lista = listaDscJugadores();
+        NodoGenerico aux = lista.getPrimero();
+        while (aux != null) {
+            str = str + "|" + aux.getDato().toString();
+            aux = aux.getSig();
+        }
+        if (!str.equals(""))
+            return str.substring(1);
+        return str;
+    }
+
+    private ListaSimple listaDscJugadores() {
+        ListaSimple lista = new ListaSimple();
+        listaDscJugadores(raiz, lista);
+        return lista;
+    }
+
+    private void listaDscJugadores(NodoABBJugador nodo, ListaSimple lista) {
+        if (nodo != null) {
+            listaDscJugadores(nodo.getDer(), lista);
+            lista.agregarAlFinal(nodo.getJugador());
+            listaDscJugadores(nodo.getIzq(), lista);
+        }
     }
 
     private ListaSimple listaAscJugadores() {
@@ -88,23 +115,10 @@ public class ABBJugadores {
     private void listaAscJugadores(NodoABBJugador nodo, ListaSimple lista) {
         if (nodo != null) {
             listaAscJugadores(nodo.getIzq(), lista);
-            lista.agregarAlPrincipio(nodo.getJugador());
+            lista.agregarAlFinal(nodo.getJugador());
             listaAscJugadores(nodo.getDer(), lista);
         }
 
-    }
-
-    public String listarJugadoresDescendente() {
-        String str = "";
-        ListaSimple lista = listaAscJugadores();
-        NodoGenerico aux = lista.getPrimero();
-        while (aux != null) {
-            str = str + "|" + aux.getDato().toString();
-            aux = aux.getSig();
-        }
-        if (!str.equals(""))
-            return str.substring(1);
-        return str;
     }
 
     public String consultaDeJugadores(Consulta consulta) {
