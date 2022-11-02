@@ -122,6 +122,42 @@ public class ABB {
 
     public  String consultaDeJugadores(Consulta consulta) {
         Consulta.NodoConsulta nc = consulta.getRaiz();
+        NodoABB nodoJugador = raiz;
+        String resultado = consultaDeJugadores(nc, nodoJugador, "");
+        if(resultado.length() > 0) return resultado.substring(1);
         return "";
     }
+
+    private String consultaDeJugadores(Consulta.NodoConsulta nc, NodoABB nodoJugador, String s) {
+        if(nodoJugador !=null){
+            String consulta = consultaDeJugadores(nc, nodoJugador.getIzq(),s);
+            if(filtro(nc,nodoJugador)){
+                consulta +=  "|" + nodoJugador.getJugador().getCedula();
+            }
+            consulta += consultaDeJugadores(nc, nodoJugador.getDer(),s);
+
+            return consulta;
+        }
+        return "";
+    }
+
+    private boolean filtro(Consulta.NodoConsulta nc, NodoABB nodoJugador) {
+
+        switch (nc.getTipoNodoConsulta()){
+            case And:
+                return filtro(nc.getIzq(), nodoJugador) && filtro(nc.getDer(), nodoJugador);
+            case Or:
+                return filtro(nc.getIzq(), nodoJugador) || filtro(nc.getDer(), nodoJugador);
+            case EdadMayor:
+                return nc.getValorInt() < nodoJugador.getJugador().getEdad();
+            case NombreIgual:
+                return nc.getValorString().equals(nodoJugador.getJugador().getNombre());
+            case EscuelaIgual:
+                return nc.getValorString().equals(nodoJugador.getJugador().getEscuela());
+            default:
+                return false;
+        }
+    }
 }
+
+
