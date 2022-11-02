@@ -1,19 +1,18 @@
-package dominio;
+package dominio.Estructuras;
+
+import dominio.Clases.CentroUrbano;
 
 public class NodoABBCentros {
     private CentroUrbano cu;
     private NodoABBCentros izq;
     private NodoABBCentros der;
-    public  NodoABBCentros(CentroUrbano cu) {
+
+    public NodoABBCentros(CentroUrbano cu) {
         this.cu = cu;
         this.izq = null;
         this.der = null;
     }
-    public  NodoABBCentros (CentroUrbano cu, NodoABBCentros izq, NodoABBCentros der) {
-        this.cu = cu;
-        this.izq = izq;
-        this.der = der;
-    }
+
     public CentroUrbano getCentro() {
         return cu;
     }
@@ -33,5 +32,4 @@ public class NodoABBCentros {
     public void setDer(NodoABBCentros der) {
         this.der = der;
     }
-
 }

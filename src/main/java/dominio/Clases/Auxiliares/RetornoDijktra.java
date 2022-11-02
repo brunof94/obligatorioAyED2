@@ -1,10 +1,10 @@
-package dominio;
+package dominio.Clases.Auxiliares;
 
-public class retornoDijktra {
+public class RetornoDijktra {
     int costo;
     String camino;
 
-    public retornoDijktra(int costo, String camino) {
+    public RetornoDijktra(int costo, String camino) {
         this.costo = costo;
         this.camino = camino;
     }

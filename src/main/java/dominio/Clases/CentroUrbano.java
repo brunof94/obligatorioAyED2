@@ -1,6 +1,6 @@
-package dominio;
+package dominio.Clases;
 
-public class CentroUrbano implements Comparable<CentroUrbano>{
+public class CentroUrbano implements Comparable<CentroUrbano> {
     private String codigo;
     private String nombre;
 
@@ -21,10 +21,11 @@ public class CentroUrbano implements Comparable<CentroUrbano>{
     public String toString() {
         return codigo + ";" + nombre;
     }
+
     @Override
     public int compareTo(CentroUrbano cu) {
-        if(this.codigo.compareTo(cu.getCodigo()) == 0) return 0;
-        if(this.codigo.compareTo( cu.getCodigo()) > 0) return 1;
+        if (this.codigo.compareTo(cu.getCodigo()) == 0) return 0;
+        if (this.codigo.compareTo(cu.getCodigo()) > 0) return 1;
         return -1;
     }
 }

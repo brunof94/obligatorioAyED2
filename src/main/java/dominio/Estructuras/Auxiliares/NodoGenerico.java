@@ -1,4 +1,4 @@
-package cola;
+package dominio.Estructuras.Auxiliares;
 
 public class NodoGenerico<T> {
     private T dato;
@@ -9,6 +9,7 @@ public class NodoGenerico<T> {
         this.dato = dato;
         this.sig = sig;
     }
+
     public NodoGenerico(T dato) {
         this.dato = dato;
     }

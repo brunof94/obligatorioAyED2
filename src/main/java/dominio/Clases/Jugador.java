@@ -1,11 +1,11 @@
-package dominio;
+package dominio.Clases;
 
 import interfaz.TipoJugador;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Jugador implements Comparable<Jugador>{
+public class Jugador implements Comparable<Jugador> {
 
     private int cedulaInt;
     private String nombre;
@@ -39,7 +39,7 @@ public class Jugador implements Comparable<Jugador>{
     }
 
     public Jugador(String cedula, String nombre, int edad, String escuela, TipoJugador tipoJugador) {
-        if(validarCedula(cedula)){
+        if (validarCedula(cedula)) {
             this.cedula = cedula;
             this.cedulaInt = convertirCIaInt(cedula);
         }
@@ -48,7 +48,8 @@ public class Jugador implements Comparable<Jugador>{
         this.escuela = escuela;
         this.tipoJugador = tipoJugador;
     }
-    public static boolean validarCedula(String cedula){
+
+    public static boolean validarCedula(String cedula) {
         String regex = "^[1-9][\\.]\\d{3}[\\.]?\\d{3}[\\.\\-/_]?[1-9]"; // https://twitter.com/federicod/status/1368944677370687495?lang=en
         String regexCorto = "^d{3}[\\.]?\\d{3}[\\.\\-/_]?[1-9]";
         Pattern pattern1 = Pattern.compile(regex);
@@ -58,14 +59,14 @@ public class Jugador implements Comparable<Jugador>{
         return matcher1.matches() || matcher2.matches();
     }
 
-    private static int convertirCIaInt(String cedula){
+    private static int convertirCIaInt(String cedula) {
         String retornoString = cedula.replaceAll("[^0-9]", "");
         return Integer.parseInt(retornoString);
     }
 
     @Override
     public String toString() {
-        return   cedula +
+        return cedula +
                 ";" + nombre +
                 ";" + edad +
                 ";" + escuela +
@@ -75,8 +76,8 @@ public class Jugador implements Comparable<Jugador>{
 
     @Override
     public int compareTo(Jugador j) {
-        if(this.cedulaInt == j.cedulaInt) return 0;
-        if(this.cedulaInt > j.cedulaInt) return 1;
+        if (this.cedulaInt == j.cedulaInt) return 0;
+        if (this.cedulaInt > j.cedulaInt) return 1;
         return -1;
     }
 }

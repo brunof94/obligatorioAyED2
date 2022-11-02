@@ -1,7 +1,8 @@
-package dominio;
+package dominio.Estructuras;
 
-import cola.NodoGenerico;
-import dominio.Lista.ListaSimpleEncadenada;
+import dominio.Estructuras.Auxiliares.NodoGenerico;
+import dominio.Clases.CentroUrbano;
+import dominio.Estructuras.Auxiliares.ListaSimple;
 
 public class ABBCentrosUrbanos {
     private NodoABBCentros raiz;
@@ -35,34 +36,36 @@ public class ABBCentrosUrbanos {
             } else {
                 return insertarRec(nodo.getDer(), centroUrbano);
             }
-        }else {
+        } else {
             return false;
         }
     }
-    private ListaSimpleEncadenada listaAsccentroUrbano() {
-        ListaSimpleEncadenada lista = new ListaSimpleEncadenada();
-        listaAsccentroUrbano(raiz,lista);
+
+    private ListaSimple listaAsccentroUrbano() {
+        ListaSimple lista = new ListaSimple();
+        listaAsccentroUrbano(raiz, lista);
         return lista;
     }
 
-    private void listaAsccentroUrbano(NodoABBCentros nodo, ListaSimpleEncadenada lista) {
-        if(nodo !=null){
-            listaAsccentroUrbano(nodo.getIzq(),lista);
+    private void listaAsccentroUrbano(NodoABBCentros nodo, ListaSimple lista) {
+        if (nodo != null) {
+            listaAsccentroUrbano(nodo.getIzq(), lista);
             lista.agregarAlPrincipio(nodo.getCentro());
-            listaAsccentroUrbano(nodo.getDer(),lista);
+            listaAsccentroUrbano(nodo.getDer(), lista);
         }
 
     }
-    public String listarcentroUrbanoAscendente(){
-        String str= "";
-        ListaSimpleEncadenada lista = listaAsccentroUrbano();
+
+    public String listarcentroUrbanoAscendente() {
+        String str = "";
+        ListaSimple lista = listaAsccentroUrbano();
         NodoGenerico aux = lista.getPrimero();
-        if(aux != null){
+        if (aux != null) {
             str = aux.getDato().toString();
             aux = aux.getSig();
         }
         while (aux != null) {
-            str+= "|" + aux.getDato().toString();
+            str += "|" + aux.getDato().toString();
             aux = aux.getSig();
         }
         return str;

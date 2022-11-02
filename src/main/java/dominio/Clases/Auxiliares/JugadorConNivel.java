@@ -1,4 +1,6 @@
-package dominio;
+package dominio.Clases.Auxiliares;
+
+import dominio.Clases.Jugador;
 
 public class JugadorConNivel {
 

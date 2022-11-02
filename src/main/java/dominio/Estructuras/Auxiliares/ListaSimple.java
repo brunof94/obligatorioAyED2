@@ -1,8 +1,6 @@
-package dominio.Lista;
+package dominio.Estructuras.Auxiliares;
 
-import cola.NodoGenerico;
-
-public class ListaSimpleEncadenada<T> {
+public class ListaSimple<T> {
 
     private NodoGenerico<T> primero;
     private NodoGenerico<T> ultimo;

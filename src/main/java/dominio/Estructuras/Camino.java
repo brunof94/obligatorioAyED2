@@ -1,5 +1,6 @@
-package dominio;
+package dominio.Estructuras;
 
+import dominio.Clases.CentroUrbano;
 import interfaz.EstadoCamino;
 
 public class Camino {
