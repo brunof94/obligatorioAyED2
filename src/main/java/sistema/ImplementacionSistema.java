@@ -30,7 +30,6 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno explorarCentroUrbano(boolean[] correctas, int[] puntajes, int minimo) {
-        boolean minimoOk = minimo > 0;
         if (correctas == null || puntajes == null) {
             return Retorno.error1("Los datos no son validos");
         }
