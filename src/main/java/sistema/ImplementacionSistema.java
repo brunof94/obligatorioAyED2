@@ -68,7 +68,7 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno registrarJugador(String ci, String nombre, int edad, String escuela, TipoJugador tipo) {
-        if (ci == null || nombre == null || escuela == null || ci == "" || nombre == "" || escuela == "" || tipo == null || edad < 1)
+        if (ci == null || nombre == null || escuela == null || ci.equals("") || nombre.equals("") || escuela.equals("") || tipo == null || edad < 1)
             return Retorno.error1("Alguno de los campos esta vacio");
         if (!Jugador.validarCedula(ci)) return Retorno.error2("El formato de la cedula es invalido");
         if (jugadores.buscarJugadorCedula(ci) != null) return Retorno.error3("Ya existe un usuario con esa cedula");
