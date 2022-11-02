@@ -12,6 +12,7 @@ import interfaz.Retorno;
 import interfaz.Sistema;
 import interfaz.TipoJugador;
 
+//Bruno Costa n207609 // Bruno Fulco n194569 https://github.com/brunof94/obligatorioAyED2
 public class ImplementacionSistema implements Sistema {
 
     private GrafoCentrosUrbanos grafoCentrosUrbanos;

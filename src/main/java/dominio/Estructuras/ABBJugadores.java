@@ -6,7 +6,7 @@ import dominio.Clases.Auxiliares.JugadorConNivel;
 import dominio.Estructuras.Auxiliares.ListaSimple;
 import interfaz.Consulta;
 import interfaz.TipoJugador;
-
+//Bruno Costa n207609 // Bruno Fulco n194569 https://github.com/brunof94/obligatorioAyED2
 public class ABBJugadores {
 
     private NodoABBJugador raiz;
@@ -45,8 +45,7 @@ public class ABBJugadores {
     }
 
     private boolean insertarRec(NodoABBJugador nodo, Jugador jugador) {
-        //Falta crear la comparacion
-        int resultadoComparar = jugador.compareTo(nodo.getJugador()); //Resultado de la comparacion con compareto
+        int resultadoComparar = jugador.compareTo(nodo.getJugador());
         if (resultadoComparar < 0) {
             if (nodo.getIzq() == null) {
                 nodo.setIzq(new NodoABBJugador(jugador));

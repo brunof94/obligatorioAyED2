@@ -4,7 +4,7 @@ import dominio.Estructuras.Auxiliares.Cola;
 import dominio.Clases.CentroUrbano;
 import dominio.Clases.Auxiliares.RetornoDijktra;
 import interfaz.EstadoCamino;
-
+//Bruno Costa n207609 // Bruno Fulco n194569 https://github.com/brunof94/obligatorioAyED2
 public class GrafoCentrosUrbanos {
     private int tope;
     private int cantidad;
